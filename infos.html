@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <title></title>
+  <style>
+    .button {
+      background-color: #04AA6D;
+      border: none;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      border-radius: 112px;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar-content"></div>
+   <div id="message"></div>
+</body>
+
+
+<script>
+
+
+window.onload = function() 
+{
+    try
+    {
+      google.script.run.withSuccessHandler(getMessage).withFailureHandler(failure).recupere_message();
+    }
+    catch(e)
+    {
+      alert("erreur get content :" + e.message);
+    }
+
+  function failure(e)
+  {
+    alert("erreur");
+  }
+}
+
+function getMessage(msg)
+{
+  //alert('getPropositionEnCours');
+  //alert(msg);
+   document.getElementById('message').innerHTML = msg;
+}
+
+function failure(e)
+  {
+    alert("error failure : " + e.message);
+  }
+
+function propose_kholleurs_et_eleves(avec_dispo_kholleurs)
+{
+  try
+  {
+    google.script.run.withFailureHandler(failure).proposer_kholleurs_et_eleves(avec_dispo_kholleurs);
+  }
+  catch (e)
+  {
+    alert("error propose_kholleurs_et_eleves: " + e.message);
+  }
+}
+
+function propose_kholleurs_uniquement()
+{
+  try
+  {
+    google.script.run.withFailureHandler(failure).proposer_kholleurs_uniquement();
+  }
+  catch (e)
+  {
+    alert("error propose_kholleurs_uniquement: " + e.message);
+  }
+}
+
+function propose_eleves()
+{
+  try
+  {
+    google.script.run.withFailureHandler(failure).proposer_eleves();
+  }
+  catch (e)
+  {
+    alert("error propose_kholleurs_sans_disponibilites: " + e.message);
+  }
+}
+
+function enregistre_planning()
+{
+   try
+  {
+    google.script.run.withSuccessHandler(succes_enregistre_seance).withFailureHandler(failure).enregistre_seance();
+  }
+  catch (e)
+  {
+    alert("error enregistre plannings : " + e.message);
+  }
+}
+
+function succes_enregistre_seance()
+{
+   try
+  {
+    google.script.host.close();
+  }
+  catch (e)
+  {
+    alert("succes_enregistre_seance : " + e.message);
+  }
+}
+
+
+</script>
+</html>
+
+
+   

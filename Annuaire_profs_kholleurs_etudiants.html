@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <title></title>
+  <style>
+    .button {
+      background-color: #18bfd6;
+      border: none;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      border-radius: 112px;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar-content"></div>
+   <div id="message"></div>
+</body>
+
+
+<script>
+
+
+window.onload = function() 
+{
+    try
+    {
+      google.script.run.withSuccessHandler(getMessage).withFailureHandler(failure).recupere_id_annuaire();
+    }
+    catch(e)
+    {
+      alert("erreur get content :" + e.message);
+    }
+
+  function failure(e)
+  {
+    alert("erreur");
+  }
+}
+
+function getMessage(msg)
+{
+  //alert('getPropositionEnCours');
+  //alert(msg);
+   document.getElementById('message').innerHTML = msg;
+}
+
+function failure(e)
+  {
+    alert("error failure : " + e.message);
+  }
+
+</script>
+</html>
+
+
+   

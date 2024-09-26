@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <title></title>
+  <style>
+    .button {
+      background-color: #18bfd6;
+      border: none;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      border-radius: 112px;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar-content"></div>
+  <button type="button" class="button" id="bouton_mails_kholleurs" onclick="envoyer_mails_rappel_feuille_notation_kholleurs();">Envoyer le mail avec le relevé des notes et commentaires aux examinateurs sélectionnés</button>
+</body>
+
+
+<script>
+
+window.onload = function() 
+{ 
+    //alert('hm1');
+    try
+    {
+      google.script.run.withSuccessHandler(getContent).withFailureHandler(failure).construit_liste_kholleurs();
+    }
+    catch(e)
+    {
+      alert("erreur get content :" + e.message);
+    }
+
+  function failure(e)
+  {
+    alert("erreur construit_liste_kholleurs" + e);
+  }
+
+  function getContent(content) {
+    //alert('hmhm ' + content);
+    document.getElementById('sidebar-content').innerHTML = content;
+    //document.getElementById("bouton_plannings").style.visibility = "hidden";
+    }
+};
+
+function closeSideBar()
+{
+  //alert('close');
+  try
+  {
+    google.script.host.close();
+  }
+  catch (e)
+  {
+    alert("error close sidebars : " + e.message);
+  }
+  
+}
+
+function failure(e)
+  {
+    alert("error construit_liste_kholleurs : " + e.message);
+  }
+
+function envoyer_mails_rappel_feuille_notation_kholleurs()
+{
+  let les_indices_kholleurs = [];
+  const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    checkedCheckboxes.forEach(checkbox => {
+      les_indices_kholleurs.push(checkbox.value);
+});
+  //alert(les_indices_kholleurs);
+  try
+    {
+      google.script.run.withSuccessHandler(closeSideBar).withFailureHandler(failure).envoie_mails_rappel_feuille_notation_kholleurs(les_indices_kholleurs);
+    }
+    catch (e)
+    {
+      alert("error envoyer_resultats_eleves: " + e.message);
+    }
+}
+
+</script>
+</html>
+
+
+   

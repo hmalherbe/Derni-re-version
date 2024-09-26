@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <title>Génération des plannings</title>
+  <style>
+    .button {
+      background-color: #04AA6D;
+      border: none;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      border-radius: 112px;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar-content"></div>
+  <BR>
+  <center><button type="button" class="button" id="bouton_plannings" onclick="choisir_planning();">Choisir ce planning</button></center>
+</body>
+
+
+<script>
+
+window.onload = function() 
+{
+    //alert('hm1');
+    try
+    {
+      google.script.run.withSuccessHandler(getContent).withFailureHandler(failure).construit_liste_plannings();
+    }
+    catch(e)
+    {
+      alert("erreur get content :" + e.message);
+    }
+
+  function failure(e)
+  {
+    alert("erreur hm " + e);
+  }
+
+  function getContent(content) {
+    //alert('hmhm ' + content);
+    document.getElementById('sidebar-content').innerHTML = content;
+    //document.getElementById("bouton_plannings").style.visibility = "hidden";
+    }
+};
+
+function closeSideBar()
+{
+  //alert('close');
+  try
+  {
+    google.script.host.close();
+  }
+  catch (e)
+  {
+    alert("error close sidebars : " + e.message);
+  }
+  
+}
+
+function failure(e)
+  {
+    alert("error plannings 1 : " + e.message);
+  }
+
+function choisir_planning()
+{
+  let markedCheckbox = document.querySelector('input[name="rd_dates_planning"]:checked').value;
+
+  var dtes = document.getElementsByName('rd_dates_planning');
+  let ind_date = -1;
+  for (let i of dtes)
+  {
+    if (i.checked) 
+    {
+      ind_date = i.value;
+    }
+  }
+  if (ind_date == -1)
+    console.log("Erreur : genere_planning");
+  else
+  {
+  try
+    {
+      google.script.run.withSuccessHandler(closeSideBar).withFailureHandler(failure).choisit_le_planning(ind_date);
+    }
+    catch (e)
+    {
+      alert("error plannings 2: " + e.message);
+    }
+  }
+}
+
+function change_choix_dates_planning()
+{
+  let markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+  document.querySelector('input[name="rate"]:checked').value;
+  if (markedCheckbox.length == 0)
+      document.getElementById("bouton_plannings").style.visibility = "hidden";
+  else
+    document.getElementById("bouton_plannings").style.visibility = "visible";
+  
+}
+
+</script>
+</html>
+
+
+   

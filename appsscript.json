@@ -1,0 +1,171 @@
+{
+  "timeZone": "Europe/Paris",
+  "dependencies": {
+    "enabledAdvancedServices": [
+      {
+        "userSymbol": "Classroom",
+        "serviceId": "classroom",
+        "version": "v1"
+      },
+      {
+        "userSymbol": "Calendar",
+        "serviceId": "calendar",
+        "version": "v3"
+      }
+    ]
+  },
+  "webapp": {
+    "executeAs": "USER_DEPLOYING",
+    "access": "MYSELF"
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/classroom.coursework.students",
+    "https://www.googleapis.com/auth/classroom.courses",
+    "https://www.googleapis.com/auth/classroom.coursework.students",
+    "https://www.googleapis.com/auth/classroom.rosters",
+    "https://www.googleapis.com/auth/calendar",
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/script.container.ui",
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/script.send_mail",
+    "https://www.googleapis.com/auth/forms"
+  ],
+  "runtimeVersion": "V8",
+  "sheets": {
+    "macros": [
+      {
+        "menuName": "entete",
+        "functionName": "entete"
+      },
+      {
+        "menuName": "entete 1",
+        "functionName": "entete1"
+      },
+      {
+        "menuName": "MENU déroulant",
+        "functionName": "myFunction"
+      },
+      {
+        "menuName": "MERGE",
+        "functionName": "MERGE"
+      },
+      {
+        "menuName": "centre",
+        "functionName": "centre"
+      },
+      {
+        "menuName": "nameranged",
+        "functionName": "nameranged"
+      },
+      {
+        "menuName": "center",
+        "functionName": "center"
+      },
+      {
+        "menuName": "mef",
+        "functionName": "mef"
+      },
+      {
+        "menuName": "cl",
+        "functionName": "cl"
+      },
+      {
+        "menuName": "autofit",
+        "functionName": "autofit"
+      },
+      {
+        "menuName": "autofit 1",
+        "functionName": "autofit1"
+      },
+      {
+        "menuName": "bordure_epaisse",
+        "functionName": "bordure_epaisse"
+      },
+      {
+        "menuName": "autof",
+        "functionName": "autof"
+      },
+      {
+        "menuName": "tri",
+        "functionName": "tri"
+      },
+      {
+        "menuName": "tri_kholleur",
+        "functionName": "tri_kholleur"
+      },
+      {
+        "menuName": "alternance",
+        "functionName": "alternance"
+      },
+      {
+        "menuName": "case_cochee",
+        "functionName": "case_cochee"
+      },
+      {
+        "menuName": "coul",
+        "functionName": "coul"
+      },
+      {
+        "menuName": "nocoul",
+        "functionName": "nocoul"
+      },
+      {
+        "menuName": "vert",
+        "functionName": "vert"
+      },
+      {
+        "menuName": "imprime",
+        "functionName": "imprime"
+      },
+      {
+        "menuName": "sup",
+        "functionName": "sup"
+      },
+      {
+        "menuName": "tcd",
+        "functionName": "tcd"
+      },
+      {
+        "menuName": "nb",
+        "functionName": "nb"
+      },
+      {
+        "menuName": "nbexa",
+        "functionName": "nbexa"
+      },
+      {
+        "menuName": "nbhm",
+        "functionName": "nbhm"
+      },
+      {
+        "menuName": "dureesi",
+        "functionName": "dureesi"
+      },
+      {
+        "menuName": "hhmm",
+        "functionName": "hhmm"
+      },
+      {
+        "menuName": "coul 1",
+        "functionName": "coul1"
+      },
+      {
+        "menuName": "rule",
+        "functionName": "rule"
+      },
+      {
+        "menuName": "titre",
+        "functionName": "titre"
+      },
+      {
+        "menuName": "coul 2",
+        "functionName": "coul2"
+      },
+      {
+        "menuName": "centrehm",
+        "functionName": "centrehm"
+      }
+    ]
+  }
+}

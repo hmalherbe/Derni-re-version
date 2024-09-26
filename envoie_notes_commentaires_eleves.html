@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <title></title>
+  <style>
+    .button {
+      background-color: #18bfd6;
+      border: none;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      border-radius: 112px;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar-content"></div>
+  <button type="button" class="button" id="bouton_plannings" onclick="envoyer_resultats_eleves();">Envoyer les résultats aux étudiants sélectionnés</button>
+</body>
+
+
+<script>
+
+window.onload = function() 
+{ 
+    //alert('hm1');
+    try
+    {
+      google.script.run.withSuccessHandler(getContent).withFailureHandler(failure).construit_liste_eleves();
+    }
+    catch(e)
+    {
+      alert("erreur get content :" + e.message);
+    }
+
+  function failure(e)
+  {
+    alert("erreur" + e);
+  }
+
+  function getContent(content) {
+    //alert('hmhm ' + content);
+    document.getElementById('sidebar-content').innerHTML = content;
+    //document.getElementById("bouton_plannings").style.visibility = "hidden";
+    }
+};
+
+function closeSideBar()
+{
+  //alert('close');
+  try
+  {
+    google.script.host.close();
+  }
+  catch (e)
+  {
+    alert("error close sidebars : " + e.message);
+  }
+  
+}
+
+function failure(e)
+  {
+    alert("error plannings 1 : " + e.message);
+  }
+
+function envoyer_resultats_eleves()
+{
+  let les_eleves = {"tous":false,"liste_eleves":[]};
+  if (document.getElementById("chk_eleves_tous").checked)
+  {
+    les_eleves["tous"] = true;
+  }
+  else
+  {
+    const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    checkedCheckboxes.forEach(checkbox => {
+      les_eleves["liste_eleves"].push(checkbox.value);
+});
+  }
+  //alert(les_eleves);
+  try
+    {
+      google.script.run.withSuccessHandler(closeSideBar).withFailureHandler(failure).envoie_resultats_eleves(les_eleves);
+    }
+    catch (e)
+    {
+      alert("error envoyer_resultats_eleves: " + e.message);
+    }
+}
+
+function change_eleves_tous(chk)
+{
+  if (chk.checked)
+  {
+    document.getElementById("div_chk_eleves").style.visibility = "hidden";
+  }
+  else
+    document.getElementById("div_chk_eleves").style.visibility = "visible";
+}
+
+function change_chk_eleves(chk)
+{
+  document.getElementById("chk_eleves_tous").checked = false;
+}
+
+</script>
+</html>
+
+
+   
